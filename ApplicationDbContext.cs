@@ -10,6 +10,6 @@ namespace Server
         {
         }
 
-        public DbSet<Member> Members { get; set; }
+        public DbSet<Member> Members { get; set; } = default!;
     }
 }

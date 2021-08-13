@@ -12,7 +12,8 @@ namespace Server.Schema
             {
                 Id = input.Id,
                 FirstName = input.FirstName,
-                LastName = input.LastName
+                LastName = input.LastName,
+                Website = input.Website
             };
 
             context.Members.Add(member);

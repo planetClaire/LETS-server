@@ -6,6 +6,7 @@ namespace Server.Schema
     (
         Guid Id,
         string FirstName,
-        string LastName
+        string LastName,
+        string? Website
     );
 }
