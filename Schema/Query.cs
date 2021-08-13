@@ -1,7 +1,11 @@
-﻿namespace Server.Schema
+﻿using HotChocolate;
+using System.Linq;
+
+namespace Server.Schema
 {
     public class Query
     {
+        public IQueryable<Member> GetMembers([Service] ApplicationDbContext context) => context.Members;
         public Notice GetNotice() =>
             new Notice
             {
