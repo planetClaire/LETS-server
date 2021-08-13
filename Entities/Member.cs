@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Server.Schema
+namespace Server.Entities
 {
     public class Member
     {

@@ -1,4 +1,5 @@
 ﻿using HotChocolate;
+using Server.Entities;
 using System.Linq;
 
 namespace Server.Schema

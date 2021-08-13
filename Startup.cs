@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -15,7 +14,10 @@ namespace Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source=lets.db"));
-            services.AddGraphQLServer().AddQueryType<Query>();
+            services
+                .AddGraphQLServer()
+                .AddQueryType<Query>()
+                .AddMutationType<Mutation>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
