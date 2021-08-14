@@ -1,20 +1,15 @@
 ﻿using HotChocolate;
+using Microsoft.EntityFrameworkCore;
 using Server.Entities;
-using System.Linq;
+using Server.Extensions;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Server.Schema
 {
     public class Query
     {
-        public IQueryable<Member> GetMembers([Service] ApplicationDbContext context) => context.Members;
-        public Notice GetNotice() =>
-            new Notice
-            {
-                Title = "C# in depth.",
-                Member = new Member
-                {
-                    FirstName = "Jon"
-                }
-            };
+        [UseApplicationDbContext]
+        public Task<List<Member>> GetMembers([ScopedService] ApplicationDbContext context) => context.Members.ToListAsync();
     }
 }

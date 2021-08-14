@@ -1,12 +1,14 @@
 ﻿using HotChocolate;
 using Server.Entities;
+using Server.Extensions;
 using System.Threading.Tasks;
 
 namespace Server.Schema
 {
     public class Mutation
     {
-        public async Task<AddMemberPayload> AddMemberAsync(AddMemberInput input, [Service] ApplicationDbContext context)
+        [UseApplicationDbContext]
+        public async Task<AddMemberPayload> AddMemberAsync(AddMemberInput input, [ScopedService] ApplicationDbContext context)
         {
             var member = new Member
             {
