@@ -7,6 +7,8 @@ namespace Server.Entities
     {
         public Guid Id { get; set; }
 
+        public string PlainId => Id.ToString();
+
         [Required]
         [StringLength(200)]
         public string? Title { get; set; }

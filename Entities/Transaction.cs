@@ -7,6 +7,8 @@ namespace Server.Entities
     {
         public Guid Id { get; set; }
 
+        public string PlainId => Id.ToString();
+
         public DateTimeOffset TransactionDate { get; set; }
 
         public Guid TransactionTypeId { get; set; }

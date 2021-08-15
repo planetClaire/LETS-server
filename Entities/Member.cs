@@ -8,6 +8,7 @@ namespace Server.Entities
     {
         public Guid Id { get; set; }
 
+        public string PlainId => Id.ToString();
         public Guid MemberTypeId { get; set; }
         public MemberType? MemberType { get; set; }
 
