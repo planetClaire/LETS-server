@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Server.Entities
@@ -6,6 +7,9 @@ namespace Server.Entities
     public class Member
     {
         public Guid Id { get; set; }
+
+        public Guid MemberTypeId { get; set; }
+        public MemberType? MemberType { get; set; }
 
         [Required]
         [StringLength(200)]
@@ -17,5 +21,14 @@ namespace Server.Entities
 
         [StringLength(1000)]
         public virtual string? Website { get; set; }
+
+        public Guid LocalityId { get; set; }
+
+        public Locality? Locality { get; set; }
+
+        public ICollection<Notice> Notices { get; set; } = new List<Notice>();
+
+        public ICollection<Transaction> Sales { get; set; } = new List<Transaction>();
+        public ICollection<Transaction> Purchases { get; set; } = new List<Transaction>();
     }
 }
