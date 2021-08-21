@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Server.Members
 {
-    [ExtendObjectType(Name = "Mutation")]
+    [ExtendObjectType("Mutation")]
     public class MemberMutations
     {
         [UseApplicationDbContext]

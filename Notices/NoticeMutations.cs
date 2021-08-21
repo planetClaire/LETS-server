@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Server.Notices
 {
-    [ExtendObjectType(Name = "Mutation")]
+    [ExtendObjectType("Mutation")]
     public class NoticeMutations
     {
         [UseApplicationDbContext]

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Server.Members
 {
-    [ExtendObjectType(Name = "Query")]
+    [ExtendObjectType("Query")]
     public class MemberQueries
     {
         [UseApplicationDbContext]

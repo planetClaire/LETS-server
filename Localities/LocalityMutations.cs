@@ -2,12 +2,11 @@
 using HotChocolate.Types;
 using Server.Entities;
 using Server.Extensions;
-using System;
 using System.Threading.Tasks;
 
 namespace Server.Localities
 {
-    [ExtendObjectType(Name = "Mutation")]
+    [ExtendObjectType("Mutation")]
     public class LocalityMutations
     {
         [UseApplicationDbContext]

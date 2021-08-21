@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Server.Notices
 {
-    [ExtendObjectType(Name = "Query")]
+    [ExtendObjectType("Query")]
     public class NoticeQueries
     {
         [UseApplicationDbContext]
-        public Task<List<Notice>> GetNotice([ScopedService] ApplicationDbContext context) => context.Notices.ToListAsync();
+        public Task<List<Notice>> GetNotices([ScopedService] ApplicationDbContext context) => context.Notices.ToListAsync();
         public Task<Notice> GetNoticeAsync([GraphQLType(typeof(IdType))] Guid id, NoticeByIdDataLoader dataLoader, CancellationToken cancellationToken) => dataLoader.LoadAsync(id, cancellationToken);
     }
 }

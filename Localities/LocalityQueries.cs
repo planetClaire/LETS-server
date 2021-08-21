@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Server.Localities
 {
-    [ExtendObjectType(Name = "Query")]
+    [ExtendObjectType("Query")]
     public class LocalityQueries
     {
         [UseApplicationDbContext]
