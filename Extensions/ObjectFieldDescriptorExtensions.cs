@@ -8,7 +8,7 @@ namespace Server.Extensions
     {
         public static IObjectFieldDescriptor UseDbContext<TDbContext>(this IObjectFieldDescriptor descriptor) where TDbContext : DbContext
         {
-            return descriptor.UseScopedService<TDbContext>(
+            return descriptor.UseScopedService(
                 create: s => s.GetRequiredService<IDbContextFactory<TDbContext>>().CreateDbContext(),
                 disposeAsync: (s, c) => c.DisposeAsync());
         }
