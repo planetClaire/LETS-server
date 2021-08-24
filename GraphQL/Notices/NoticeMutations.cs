@@ -9,8 +9,8 @@ namespace GraphQL.Notices
     [ExtendObjectType("Mutation")]
     public class NoticeMutations
     {
-        [UseApplicationDbContext]
-        public async Task<AddNoticePayload> AddNoticeAsync(AddNoticeInput input, [ScopedService] ApplicationDbContext context)
+        [UseGraphQLDbContext]
+        public async Task<AddNoticePayload> AddNoticeAsync(AddNoticeInput input, [ScopedService] GraphQLDbContext context)
         {
             var notice = new Notice
             {

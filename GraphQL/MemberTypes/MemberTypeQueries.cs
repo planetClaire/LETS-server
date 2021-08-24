@@ -14,8 +14,8 @@ namespace GraphQL.MemberTypes
     [ExtendObjectType("Query")]
     public class MemberTypeQueries
     {
-        [UseApplicationDbContext]
-        public Task<List<MemberType>> GetMemberTypes([ScopedService] ApplicationDbContext context) => context.MemberTypes.ToListAsync();
+        [UseGraphQLDbContext]
+        public Task<List<MemberType>> GetMemberTypes([ScopedService] GraphQLDbContext context) => context.MemberTypes.ToListAsync();
         public Task<MemberType> GetMemberTypeAsync([GraphQLType(typeof(IdType))] Guid id, MemberTypeByIdDataLoader dataLoader, CancellationToken cancellationToken) => dataLoader.LoadAsync(id, cancellationToken);
     }
 }

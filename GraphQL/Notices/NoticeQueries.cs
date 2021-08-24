@@ -14,8 +14,8 @@ namespace GraphQL.Notices
     [ExtendObjectType("Query")]
     public class NoticeQueries
     {
-        [UseApplicationDbContext]
-        public Task<List<Notice>> GetNotices([ScopedService] ApplicationDbContext context) => context.Notices.ToListAsync();
+        [UseGraphQLDbContext]
+        public Task<List<Notice>> GetNotices([ScopedService] GraphQLDbContext context) => context.Notices.ToListAsync();
         public Task<Notice> GetNoticeAsync([GraphQLType(typeof(IdType))] Guid id, NoticeByIdDataLoader dataLoader, CancellationToken cancellationToken) => dataLoader.LoadAsync(id, cancellationToken);
     }
 }

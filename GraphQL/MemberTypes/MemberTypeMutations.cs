@@ -9,8 +9,8 @@ namespace GraphQL.MemberTypes
     [ExtendObjectType("Mutation")]
     public class MemberTypeMutations
     {
-        [UseApplicationDbContext]
-        public async Task<AddMemberTypePayload> AddMemberTypeAsync(AddMemberTypeInput input, [ScopedService] ApplicationDbContext context)
+        [UseGraphQLDbContext]
+        public async Task<AddMemberTypePayload> AddMemberTypeAsync(AddMemberTypeInput input, [ScopedService] GraphQLDbContext context)
         {
             var memberType  = new MemberType
             {

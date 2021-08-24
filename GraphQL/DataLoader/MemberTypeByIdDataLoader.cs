@@ -12,16 +12,16 @@ namespace GraphQL.DataLoader
 {
     public class MemberTypeByIdDataLoader : BatchDataLoader<Guid, MemberType>
     {
-        private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
+        private readonly IDbContextFactory<GraphQLDbContext> _dbContextFactory;
 
-        public MemberTypeByIdDataLoader(IBatchScheduler batchScheduler, IDbContextFactory<ApplicationDbContext> dbContextFactory) : base(batchScheduler)
+        public MemberTypeByIdDataLoader(IBatchScheduler batchScheduler, IDbContextFactory<GraphQLDbContext> dbContextFactory) : base(batchScheduler)
         {
             _dbContextFactory = dbContextFactory ?? throw new ArgumentNullException(nameof(dbContextFactory));
         }
 
         protected override async Task<IReadOnlyDictionary<Guid, MemberType>> LoadBatchAsync(IReadOnlyList<Guid> keys, CancellationToken cancellationToken)
         {
-            await using ApplicationDbContext dbContext = _dbContextFactory.CreateDbContext();
+            await using GraphQLDbContext dbContext = _dbContextFactory.CreateDbContext();
 
             return await dbContext.MemberTypes.Where(s => keys.Contains(s.Id)).ToDictionaryAsync(t => t.Id, cancellationToken);
         }

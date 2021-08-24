@@ -14,8 +14,8 @@ namespace GraphQL.Localities
     [ExtendObjectType("Query")]
     public class LocalityQueries
     {
-        [UseApplicationDbContext]
-        public Task<List<Locality>> GetLocalities([ScopedService] ApplicationDbContext context) => context.Localities.ToListAsync();
+        [UseGraphQLDbContext]
+        public Task<List<Locality>> GetLocalities([ScopedService] GraphQLDbContext context) => context.Localities.ToListAsync();
         public Task<Locality> GetLocalityAsync([GraphQLType(typeof(IdType))] Guid id, LocalityByIdDataLoader dataLoader, CancellationToken cancellationToken) => dataLoader.LoadAsync(id, cancellationToken);
     }
 }

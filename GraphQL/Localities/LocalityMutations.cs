@@ -9,8 +9,8 @@ namespace GraphQL.Localities
     [ExtendObjectType("Mutation")]
     public class LocalityMutations
     {
-        [UseApplicationDbContext]
-        public async Task<AddLocalityPayload> AddLocalityAsync(AddLocalityInput input, [ScopedService] ApplicationDbContext context)
+        [UseGraphQLDbContext]
+        public async Task<AddLocalityPayload> AddLocalityAsync(AddLocalityInput input, [ScopedService] GraphQLDbContext context)
         {
             var locality = new Locality
             {

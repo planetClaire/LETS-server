@@ -3,13 +3,12 @@ using GraphQL.Entities;
 
 namespace GraphQL
 {
-    public class ApplicationDbContext : DbContext
+    public class GraphQLDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+        public GraphQLDbContext(DbContextOptions<GraphQLDbContext> contextOptions)
+            : base(contextOptions)
         {
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Transaction>().HasOne<Member>("Seller").WithMany(m => m.Sales);

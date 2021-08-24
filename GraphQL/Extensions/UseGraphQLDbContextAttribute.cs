@@ -4,11 +4,11 @@ using System.Reflection;
 
 namespace GraphQL.Extensions
 {
-    public class UseApplicationDbContextAttribute : ObjectFieldDescriptorAttribute
+    public class UseGraphQLDbContextAttribute : ObjectFieldDescriptorAttribute
     {
         public override void OnConfigure(IDescriptorContext context, IObjectFieldDescriptor descriptor, MemberInfo member)
         {
-            descriptor.UseDbContext<ApplicationDbContext>();
+            descriptor.UseDbContext<GraphQLDbContext>();
         }
     }
 }

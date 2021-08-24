@@ -8,7 +8,7 @@ using GraphQL;
 
 namespace GraphQL.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(GraphQLDbContext))]
     [Migration("20210813233007_Initial")]
     partial class Initial
     {
