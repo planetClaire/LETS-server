@@ -307,3 +307,4 @@ __mismatch__
 /lets.db
 /lets.db-shm
 /lets.db-wal
+/IdentityServer/tempkey.jwk
