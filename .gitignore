@@ -308,3 +308,4 @@ __mismatch__
 /lets.db-shm
 /lets.db-wal
 /IdentityServer/tempkey.jwk
+/IdentityServer/appsettings.Development.json
