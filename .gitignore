@@ -309,3 +309,4 @@ __mismatch__
 /lets.db-wal
 /IdentityServer/tempkey.jwk
 /IdentityServer/appsettings.Development.json
+/*-firebase-adminsdk-*.json

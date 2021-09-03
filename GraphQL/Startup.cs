@@ -13,6 +13,7 @@ using GraphQL.Notices;
 using GraphQL.Types;
 using System;
 using Microsoft.IdentityModel.Tokens;
+using FirebaseAdmin;
 
 namespace GraphQL
 {
@@ -25,12 +26,32 @@ namespace GraphQL
             Configuration = configuration;
         }
 
+        readonly string LETSCorsPolicy = "LETSCorsPolicy";
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            FirebaseApp.Create();
+
             services.AddAuthorization();
 
+            var allowedOrigins = Configuration.GetValue<string>("AllowedOrigins");
+            if (!string.IsNullOrEmpty(allowedOrigins))
+            {
+                var origins = allowedOrigins.Split(";");
+                services.AddCors(options =>
+                {
+                    options.AddPolicy(name: LETSCorsPolicy,
+                        builder =>
+                        {
+                            builder.WithOrigins(origins)
+                                .AllowAnyHeader()
+                                .AllowCredentials().AllowAnyMethod();
+                        });
+                });
+            }
+        
             services.AddPooledDbContextFactory<GraphQLDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")).LogTo(Console.WriteLine));
             services
                 .AddGraphQLServer()
@@ -64,12 +85,17 @@ namespace GraphQL
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
                 {
-                    options.Authority = "https://localhost:5001";
-
+                    var fbAppId = Configuration.GetValue<string>("FIREBASE_APPLICATION_ID");
+                    options.Authority = "https://securetoken.google.com/" + fbAppId;
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateAudience = false
+                        ValidateIssuer = true,
+                        ValidIssuer = "https://securetoken.google.com/" + fbAppId,
+                        ValidateAudience = true,
+                        ValidAudience = fbAppId,
+                        ValidateLifetime = true
                     };
+
                 });
 
         }
@@ -82,6 +108,8 @@ namespace GraphQL
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(LETSCorsPolicy);
+
             app.UseRouting();
 
             app.UseAuthentication();
@@ -93,6 +121,8 @@ namespace GraphQL
                 // block any unauthorised access
                 .RequireAuthorization();
             });
+
+
         }
     }
 }
