@@ -1,5 +1,4 @@
 ﻿using GreenDonut;
-using HotChocolate.DataLoader;
 using Microsoft.EntityFrameworkCore;
 using GraphQL.Entities;
 using System;

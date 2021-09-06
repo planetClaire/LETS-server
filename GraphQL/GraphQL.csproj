@@ -7,8 +7,8 @@
 
   <ItemGroup>
     <PackageReference Include="FirebaseAdmin" Version="2.2.0" />
-    <PackageReference Include="HotChocolate.AspNetCore" Version="11.3.5" />
-    <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="11.3.5" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="12.0.0-rc.2" />
+    <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="12.0.0-rc.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.9">
