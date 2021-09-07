@@ -12,11 +12,11 @@ namespace GraphQL.Entities
 
         [Required]
         [StringLength(200)]
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string? Postcode { get; set; }
+        public string Postcode { get; set; }
 
         public ICollection<Member> Members { get; set; } = new List<Member>();
     }

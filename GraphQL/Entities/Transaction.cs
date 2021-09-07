@@ -13,17 +13,17 @@ namespace GraphQL.Entities
 
         public Guid TransactionTypeId { get; set; }
 
-        public TransactionType? TransactionType { get; set; }
+        public TransactionType TransactionType { get; set; }
 
         [Required]
         [StringLength(1000)]
-        public string? Description { get; set; }
+        public string Description { get; set; }
 
-        public Guid SellerId { get; set; }
-        public Member? Seller { get; set; }
+        public string SellerId { get; set; }
+        public Member Seller { get; set; }
 
-        public Guid BuyerId { get; set; }
-        public Member? Buyer { get; set; }
+        public string BuyerId { get; set; }
+        public Member Buyer { get; set; }
 
         public int Value { get; set; }
 

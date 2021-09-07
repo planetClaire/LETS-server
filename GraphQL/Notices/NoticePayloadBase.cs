@@ -16,6 +16,6 @@ namespace GraphQL.Notices
         {
         }
 
-        public Notice? Notice { get; }
+        public Notice Notice { get; }
     }
 }

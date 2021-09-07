@@ -11,12 +11,12 @@ namespace GraphQL.Entities
 
         [Required]
         [StringLength(200)]
-        public string? Title { get; set; }
-        
-        public Guid MemberId { get; set; }
-        public Member? Member { get; set; }
+        public string Title { get; set; }
+
+        public string MemberId { get; set; }
+        public Member Member { get; set; }
 
         public Guid NoticeTypeId { get; set; }
-        public NoticeType? NoticeType { get; set; }
+        public NoticeType NoticeType { get; set; }
     }
 }

@@ -6,7 +6,7 @@ namespace GraphQL.Notices
     (
         Guid Id,
         string Title,
-        Guid MemberId,
+        string MemberId,
         Guid NoticeTypeId
     );
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GraphQL.DataLoader
 {
-    public class MemberByIdDataLoader : BatchDataLoader<Guid, Member>
+    public class MemberByIdDataLoader : BatchDataLoader<string, Member>
     {
         private readonly IDbContextFactory<GraphQLDbContext> _dbContextFactory;
 
@@ -18,11 +18,13 @@ namespace GraphQL.DataLoader
             _dbContextFactory = dbContextFactory ?? throw new ArgumentNullException(nameof(dbContextFactory));
         }
 
-        protected override async Task<IReadOnlyDictionary<Guid, Member>> LoadBatchAsync(IReadOnlyList<Guid> keys, CancellationToken cancellationToken)
+        protected override async Task<IReadOnlyDictionary<string, Member>> LoadBatchAsync(IReadOnlyList<string> keys, CancellationToken cancellationToken)
         {
             await using GraphQLDbContext dbContext = _dbContextFactory.CreateDbContext();
+            var foundMembers = await dbContext.Members.Where(m => keys.Contains(m.Id)).ToDictionaryAsync(m => m.Id, cancellationToken);
+            var notFound = keys.Except(foundMembers.Keys).Select(key => new KeyValuePair<string, Member>(key, null));
+            return new Dictionary<string, Member>(foundMembers.Concat(notFound));
 
-            return await dbContext.Members.Where(s => keys.Contains(s.Id)).ToDictionaryAsync(t => t.Id, cancellationToken);
         }
     }
 }

@@ -22,7 +22,9 @@ namespace GraphQL.DataLoader
         {
             await using GraphQLDbContext dbContext = _dbContextFactory.CreateDbContext();
 
-            return await dbContext.MemberTypes.Where(s => keys.Contains(s.Id)).ToDictionaryAsync(t => t.Id, cancellationToken);
+            var foundMemberTypes = await dbContext.MemberTypes.Where(mt => keys.Contains(mt.Id)).ToDictionaryAsync(mt => mt.Id, cancellationToken);
+            var notFound = keys.Except(foundMemberTypes.Keys).Select(key => new KeyValuePair<Guid, MemberType>(key, null));
+            return new Dictionary<Guid, MemberType>(foundMemberTypes.Concat(notFound));
         }
     }
 }

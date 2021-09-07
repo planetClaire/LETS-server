@@ -16,6 +16,7 @@ namespace GraphQL.Members
     {
         [UseGraphQLDbContext]
         public Task<List<Member>> GetMembers([ScopedService] GraphQLDbContext context) => context.Members.ToListAsync();
-        public Task<Member> GetMemberAsync([GraphQLType(typeof(IdType))] Guid id, MemberByIdDataLoader dataLoader, CancellationToken cancellationToken) => dataLoader.LoadAsync(id, cancellationToken);
+        public Task<Member> GetMemberAsync([GraphQLType(typeof(IdType))] string id, MemberByIdDataLoader dataLoader, CancellationToken cancellationToken) => dataLoader.LoadAsync(id, cancellationToken);
+
     }
 }

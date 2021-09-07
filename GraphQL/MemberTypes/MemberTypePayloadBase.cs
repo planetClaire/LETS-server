@@ -16,6 +16,6 @@ namespace GraphQL.MemberTypes
         {
         }
 
-        public MemberType? MemberType { get; }
+        public MemberType MemberType { get; }
     }
 }

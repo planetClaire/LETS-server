@@ -21,8 +21,9 @@ namespace GraphQL.DataLoader
         protected override async Task<IReadOnlyDictionary<Guid, Locality>> LoadBatchAsync(IReadOnlyList<Guid> keys, CancellationToken cancellationToken)
         {
             await using GraphQLDbContext dbContext = _dbContextFactory.CreateDbContext();
-
-            return await dbContext.Localities.Where(s => keys.Contains(s.Id)).ToDictionaryAsync(t => t.Id, cancellationToken);
+            var foundLocalities = await dbContext.Localities.Where(l => keys.Contains(l.Id)).ToDictionaryAsync(l => l.Id, cancellationToken);
+            var notFound = keys.Except(foundLocalities.Keys).Select(key => new KeyValuePair<Guid, Locality>(key, null));
+            return new Dictionary<Guid, Locality>(foundLocalities.Concat(notFound));
         }
     }
 }

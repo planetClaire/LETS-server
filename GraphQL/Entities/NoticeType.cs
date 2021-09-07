@@ -12,7 +12,7 @@ namespace GraphQL.Entities
 
         [Required]
         [StringLength(200)]
-        public string? Type { get; set; }
+        public string Type { get; set; }
 
         public ICollection<Notice> Notices { get; set; } = new List<Notice>();
     }

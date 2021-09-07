@@ -16,6 +16,6 @@ namespace GraphQL.Members
         {
         }
 
-        public Member? Member { get; }
+        public Member Member { get; }
     }
 }

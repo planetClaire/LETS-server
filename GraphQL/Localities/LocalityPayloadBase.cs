@@ -16,6 +16,6 @@ namespace GraphQL.Localities
         {
         }
 
-        public Locality? Locality { get; }
+        public Locality Locality { get; }
     }
 }
