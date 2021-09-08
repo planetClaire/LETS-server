@@ -19,13 +19,18 @@ namespace GraphQL.Entities
         [StringLength(200)]
         public string LastName { get; set; }
 
+        [StringLength(200)]
+        public string Phone { get; set; }
+
         [StringLength(1000)]
-        public virtual string Website { get; set; }
+        public string StreetAddress { get; set; }
 
         public Guid LocalityId { get; set; }
 
         public Locality Locality { get; set; }
 
+        [StringLength(1000)]
+        public string Website { get; set; }
         public ICollection<Notice> Notices { get; set; } = new List<Notice>();
 
         public ICollection<Transaction> Sales { get; set; } = new List<Transaction>();

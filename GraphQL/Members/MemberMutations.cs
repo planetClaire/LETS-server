@@ -2,7 +2,6 @@
 using HotChocolate.Types;
 using GraphQL.Entities;
 using GraphQL.Extensions;
-using System;
 using System.Threading.Tasks;
 
 namespace GraphQL.Members
@@ -20,7 +19,9 @@ namespace GraphQL.Members
                 MemberTypeId = input.MemberTypeId,
                 FirstName = input.FirstName,
                 LastName = input.LastName,
-                Website = input.Website
+                Website = input.Website,
+                Phone = input.Phone,
+                StreetAddress = input.StreetAddress
             };
 
             context.Members.Add(member);

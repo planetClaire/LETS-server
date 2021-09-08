@@ -9,6 +9,8 @@ namespace GraphQL.Members
         Guid MemberTypeId,
         string FirstName,
         string LastName,
-        string Website
+        string Website,
+        string Phone,
+        string StreetAddress
     );
 }
