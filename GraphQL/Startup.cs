@@ -14,6 +14,9 @@ using GraphQL.Types;
 using System;
 using Microsoft.IdentityModel.Tokens;
 using FirebaseAdmin;
+using System.Threading.Tasks;
+using FirebaseAdmin.Auth;
+using System.Collections.Generic;
 
 namespace GraphQL
 {
@@ -51,7 +54,7 @@ namespace GraphQL
                         });
                 });
             }
-        
+
             services.AddPooledDbContextFactory<GraphQLDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")).LogTo(Console.WriteLine));
             services
                 .AddGraphQLServer()
@@ -117,13 +120,49 @@ namespace GraphQL
             app.UseAuthentication();
             app.UseAuthorization();
 
+            CreateAdminUser().GetAwaiter().GetResult();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGraphQL()
                 // block any unauthorised access
-                .RequireAuthorization();
+                //.RequireAuthorization()
+                ;
             });
 
+
+        }
+
+        private async Task CreateAdminUser()
+        {
+            var adminEmail = Configuration.GetValue<string>("AdminUser");
+            if (!string.IsNullOrEmpty(adminEmail))
+            {
+                UserRecord userRecord = null;
+                try
+                {
+                    userRecord = await FirebaseAuth.DefaultInstance.GetUserByEmailAsync(adminEmail);
+                }
+                catch(FirebaseAuthException ex)
+                {
+                    if (ex.AuthErrorCode == AuthErrorCode.UserNotFound)
+                    {
+                        UserRecordArgs args = new UserRecordArgs()
+                        {
+                            Email = adminEmail,
+                            EmailVerified = true,
+                            Disabled = false,
+                        };
+                        userRecord = await FirebaseAuth.DefaultInstance.CreateUserAsync(args);
+
+                    }
+                }
+                var claims = new Dictionary<string, object>()
+                {
+                    { "admin", true },
+                };
+                await FirebaseAuth.DefaultInstance.SetCustomUserClaimsAsync(userRecord.Uid, claims);
+            }
 
         }
     }
