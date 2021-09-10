@@ -143,10 +143,7 @@ namespace GraphQL
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGraphQL()
-                // block any unauthorised access
-                //.RequireAuthorization()
-                ;
+                endpoints.MapGraphQL();
             });
 
 
