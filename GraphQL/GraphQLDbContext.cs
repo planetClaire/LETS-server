@@ -17,7 +17,6 @@ namespace GraphQL
 
         public DbSet<Locality> Localities { get; set; } = default!;
         public DbSet<Member> Members { get; set; } = default!;
-        public DbSet<MemberType> MemberTypes { get; set; } = default!;
         public DbSet<Notice> Notices { get; set; } = default!;
         public DbSet<NoticeType> NoticeTypes { get; set; } = default!;
         public DbSet<Transaction> Transactions { get; set; } = default!;

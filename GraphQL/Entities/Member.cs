@@ -8,8 +8,6 @@ namespace GraphQL.Entities
     {
         public string Id { get; set; }
         public bool Approved { get; set; }
-        public Guid MemberTypeId { get; set; }
-        public MemberType MemberType { get; set; }
 
         [Required]
         [StringLength(200)]
@@ -31,6 +29,7 @@ namespace GraphQL.Entities
 
         [StringLength(1000)]
         public string Website { get; set; }
+
         public ICollection<Notice> Notices { get; set; } = new List<Notice>();
 
         public ICollection<Transaction> Sales { get; set; } = new List<Transaction>();

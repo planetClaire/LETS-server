@@ -6,7 +6,6 @@ namespace GraphQL.Members
     (
         string Id,
         Guid LocalityId,
-        Guid MemberTypeId,
         string FirstName,
         string LastName,
         string Website,

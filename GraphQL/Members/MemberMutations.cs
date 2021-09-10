@@ -16,7 +16,6 @@ namespace GraphQL.Members
             {
                 Id = input.Id,
                 LocalityId = input.LocalityId,
-                MemberTypeId = input.MemberTypeId,
                 FirstName = input.FirstName,
                 LastName = input.LastName,
                 Website = input.Website,

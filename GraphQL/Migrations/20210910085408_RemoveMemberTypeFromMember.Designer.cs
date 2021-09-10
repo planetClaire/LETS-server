@@ -3,14 +3,16 @@ using System;
 using GraphQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GraphQL.Migrations
 {
     [DbContext(typeof(GraphQLDbContext))]
-    partial class GraphQLDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210910085408_RemoveMemberTypeFromMember")]
+    partial class RemoveMemberTypeFromMember
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,6 +60,9 @@ namespace GraphQL.Migrations
                     b.Property<Guid>("LocalityId")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("MemberTypeId")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Phone")
                         .HasMaxLength(200)
                         .HasColumnType("TEXT");
@@ -74,7 +79,25 @@ namespace GraphQL.Migrations
 
                     b.HasIndex("LocalityId");
 
+                    b.HasIndex("MemberTypeId");
+
                     b.ToTable("Members");
+                });
+
+            modelBuilder.Entity("GraphQL.Entities.MemberType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MemberTypes");
                 });
 
             modelBuilder.Entity("GraphQL.Entities.Notice", b =>
@@ -180,6 +203,10 @@ namespace GraphQL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("GraphQL.Entities.MemberType", null)
+                        .WithMany("Members")
+                        .HasForeignKey("MemberTypeId");
+
                     b.Navigation("Locality");
                 });
 
@@ -235,6 +262,11 @@ namespace GraphQL.Migrations
                     b.Navigation("Purchases");
 
                     b.Navigation("Sales");
+                });
+
+            modelBuilder.Entity("GraphQL.Entities.MemberType", b =>
+                {
+                    b.Navigation("Members");
                 });
 
             modelBuilder.Entity("GraphQL.Entities.NoticeType", b =>

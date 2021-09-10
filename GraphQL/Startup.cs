@@ -4,7 +4,6 @@ using FirebaseAdmin.Auth;
 using GraphQL.DataLoader;
 using GraphQL.Localities;
 using GraphQL.Members;
-using GraphQL.MemberTypes;
 using GraphQL.Notices;
 using GraphQL.Types;
 using HotChocolate.Types;
@@ -67,18 +66,15 @@ namespace GraphQL
                 .AddQueryType(d => d.Name("Query"))
                     .AddTypeExtension<LocalityQueries>()
                     .AddTypeExtension<MemberQueries>()
-                    .AddTypeExtension<MemberTypeQueries>()
                     .AddTypeExtension<NoticeQueries>()
                 //.AddTypeExtension<NoticeTypeQueries>()
                 .AddMutationType(d => d.Name("Mutation"))
                     .AddTypeExtension<LocalityMutations>()
                     .AddTypeExtension<MemberMutations>()
-                    .AddTypeExtension<MemberTypeMutations>()
                     .AddTypeExtension<NoticeMutations>()
                 //.AddTypeExtension<NoticeTypeMutations>()
                 .AddType<LocalityType>()
                 .AddType<MemberType>()
-                .AddType<MemberTypeType>()
                 .AddType<NoticeType>()
                 //.AddType<NoticeTypeType>()
                 //.EnableRelaySupport()
@@ -87,7 +83,6 @@ namespace GraphQL
                 .AddDataLoader<LocalityByIdDataLoader>()
                 .AddDataLoader<NoticeByIdDataLoader>()
                 .AddDataLoader<MemberByIdDataLoader>()
-                .AddDataLoader<MemberTypeByIdDataLoader>()
             //.AddDataLoader<NoticeTypeByIdDataLoader>()
             ;
 
