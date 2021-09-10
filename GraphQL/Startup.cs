@@ -1,22 +1,26 @@
-using HotChocolate.Types;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+
+using FirebaseAdmin;
+using FirebaseAdmin.Auth;
 using GraphQL.DataLoader;
 using GraphQL.Localities;
 using GraphQL.Members;
 using GraphQL.MemberTypes;
 using GraphQL.Notices;
 using GraphQL.Types;
-using System;
+using HotChocolate.Types;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using FirebaseAdmin;
-using System.Threading.Tasks;
-using FirebaseAdmin.Auth;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace GraphQL
 {
@@ -100,6 +104,21 @@ namespace GraphQL
                         ValidAudience = fbAppId,
                         ValidateLifetime = true
                     };
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnTokenValidated = ctx =>
+                        {
+                            var adminClaim = ctx.Principal.Claims.FirstOrDefault(c => c.Type == "admin");
+                            if (adminClaim != null && bool.Parse(adminClaim.Value))
+                            {
+                                if (ctx.Principal.Identity is ClaimsIdentity identity)
+                                {
+                                    identity.AddClaim(new Claim(ClaimTypes.Role, "admin"));
+                                }
+                            }
+                            return Task.CompletedTask;
+                        }
+                    };
 
                 });
 
@@ -143,7 +162,7 @@ namespace GraphQL
                 {
                     userRecord = await FirebaseAuth.DefaultInstance.GetUserByEmailAsync(adminEmail);
                 }
-                catch(FirebaseAuthException ex)
+                catch (FirebaseAuthException ex)
                 {
                     if (ex.AuthErrorCode == AuthErrorCode.UserNotFound)
                     {
