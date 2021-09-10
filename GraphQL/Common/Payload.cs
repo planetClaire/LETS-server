@@ -4,11 +4,11 @@ namespace GraphQL.Common
 {
     public class Payload
     {
-        protected Payload(IReadOnlyList<UserError> errors = null)
+        protected Payload(IReadOnlyList<UserError> userErrors = null)
         {
-            Errors = errors;
+            UserErrors = userErrors;
         }
 
-        public IReadOnlyList<UserError>Errors { get; }
+        public IReadOnlyList<UserError> UserErrors { get; }
     }
 }

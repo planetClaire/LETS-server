@@ -8,10 +8,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using HotChocolate.AspNetCore.Authorization;
 
 namespace GraphQL.Localities
 {
     [ExtendObjectType("Query")]
+    [Authorize]
     public class LocalityQueries
     {
         [UseGraphQLDbContext]

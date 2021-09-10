@@ -1,15 +1,25 @@
-﻿namespace GraphQL.Common
+﻿using System.ComponentModel;
+
+namespace GraphQL.Common
 {
     public class UserError
     {
-        public UserError(string message, string code)
+        public UserError(UserErrorCode code, string field = null)
         {
-            Message = message;
             Code = code;
+            Field = field;
         }
+        public UserErrorCode Code { get; }
+        public string Message => Code.GetDescription();
+        public string Field { get; }
 
-        public string Message { get; }
-
-        public string Code { get; }
     }
+
+    public enum UserErrorCode
+    {
+        [Description("Locality not found")]
+        LOCALITY_NOT_FOUND
+
+    }
+
 }

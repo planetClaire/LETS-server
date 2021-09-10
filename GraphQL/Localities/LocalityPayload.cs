@@ -4,15 +4,15 @@ using System.Collections.Generic;
 
 namespace GraphQL.Localities
 {
-    public class LocalityPayloadBase : Payload
+    public class LocalityPayload : Payload
     {
-        protected LocalityPayloadBase(Locality locality)
+        public LocalityPayload(Locality locality)
         {
             Locality = locality;
         }
 
-        protected LocalityPayloadBase(IReadOnlyList<UserError> errors)
-            : base(errors)
+        public LocalityPayload(IReadOnlyList<UserError> userErrors)
+            : base(userErrors)
         {
         }
 

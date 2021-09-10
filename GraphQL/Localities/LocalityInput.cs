@@ -2,7 +2,7 @@
 
 namespace GraphQL.Localities
 {
-    public record AddLocalityInput
+    public record LocalityInput
     (
         Guid Id,
         string Name,

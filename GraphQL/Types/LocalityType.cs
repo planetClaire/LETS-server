@@ -1,5 +1,4 @@
-﻿using HotChocolate.Resolvers;
-using HotChocolate.Types;
+﻿using HotChocolate.Types;
 using GraphQL.DataLoader;
 using GraphQL.Entities;
 
