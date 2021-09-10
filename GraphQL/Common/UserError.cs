@@ -18,7 +18,9 @@ namespace GraphQL.Common
     public enum UserErrorCode
     {
         [Description("Locality not found")]
-        LOCALITY_NOT_FOUND
+        LOCALITY_NOT_FOUND,
+        [Description("Member already exists")]
+        DUPLICATE_MEMBER
 
     }
 

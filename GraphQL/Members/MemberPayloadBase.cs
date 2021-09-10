@@ -11,8 +11,8 @@ namespace GraphQL.Members
             Member = member;
         }
 
-        protected MemberPayloadBase(IReadOnlyList<UserError> errors)
-            : base(errors)
+        protected MemberPayloadBase(IReadOnlyList<UserError> userErrors)
+            : base(userErrors)
         {
         }
 
