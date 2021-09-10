@@ -8,7 +8,7 @@ namespace GraphQL.Entities
     {
         public Guid Id { get; set; }
 
-        public string PlainId => Id.ToString();
+        public string Uid => Id.ToString();
 
         [Required]
         [StringLength(200)]
